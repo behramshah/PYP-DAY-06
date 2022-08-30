@@ -1,29 +1,14 @@
-const startButton = document.getElementById('start-button');
-const stopButton = document.getElementById('stop-button');
-const resetButton = document.getElementById('reset-button');
-const timer = document.getElementById('timer');
+let turn = document.getElementById('game-heading');
 
-function enableButtons () {
-    stopButton.removeAttribute('disabled');
-    resetButton.removeAttribute('disabled');
-}
+document.addEventListener('click', event => {
 
-let isCounting = false;
-let time = 0;
-let timerID;
-
-function countUp() {
-    time++;
-    let min = Math.floor(time / 100 / 60);
-    let sec = Math.floor(time / 100);
-    if (sec >= 60) sec = sec % 60;
-    let milSec = Math.floor(time % 100);
-  
-    let timeStr = `${min > 9 ? min : "0" + min}:${sec > 9 ? sec : "0" + sec}:${
-      milSec > 9 ? milSec : "0" + milSec
-    }`;
-  
-    timeDisplay.textContent = timeStr;
+  if(turn.innerHTML.includes('Players 1') && !event.target.innerHTML) {
+    event.target.innerHTML = 'X';
+    event.target.className = '.game-square:disabled';
+    turn.innerHTML = `Players 2's Turn`
+  } else if (!event.target.innerHTML) {
+    event.target.innerHTML = 'O';
+    event.target.className = '.game-square:disabled';
+    turn.innerHTML = `Players 1's Turn`
   }
-
-startButton.addEventListener('click', startTimer);
+})
